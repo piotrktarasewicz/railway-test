@@ -16,6 +16,13 @@ def db_test():
         if not database_url:
             return {"db": "error", "details": "DATABASE_URL is None"}
 
+        # Wymuszamy SSL
+        if "sslmode" not in database_url:
+            if "?" in database_url:
+                database_url += "&sslmode=require"
+            else:
+                database_url += "?sslmode=require"
+
         with psycopg.connect(database_url) as conn:
             with conn.cursor() as cur:
                 cur.execute("SELECT 1;")
