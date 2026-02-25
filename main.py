@@ -10,6 +10,8 @@ DATABASE_URL = os.getenv("DATABASE_URL")
 def root():
     return {
         "status": "ok",
+        "service_name": os.getenv("RAILWAY_SERVICE_NAME"),
+        "environment": os.getenv("RAILWAY_ENVIRONMENT"),
         "database_url_present": DATABASE_URL is not None
     }
 
